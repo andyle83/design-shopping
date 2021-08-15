@@ -16,6 +16,10 @@ public class Customer {
         return payment.map(value -> new Order(this, shoppingCard, value));
     }
 
+    public int calculateDiscount() {
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +

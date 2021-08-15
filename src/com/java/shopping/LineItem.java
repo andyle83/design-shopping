@@ -9,12 +9,13 @@ public class LineItem {
         this.quantity = quantity;
     }
 
-    public Product getProduct() {
-        return this.product;
+    public LineItem(LineItem lineItem) {
+        this.product = lineItem.getProduct();
+        this.quantity = lineItem.getPrice();
     }
 
-    public int getQuantity() {
-        return this.quantity;
+    public Product getProduct() {
+        return this.product;
     }
 
     @Override
