@@ -1,14 +1,18 @@
 package com.java.shopping;
 
-import javax.sound.sampled.Line;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShoppingCard {
     private List<LineItem> lineItems = new ArrayList<>();
 
-    public void addLineItem(LineItem lineItem) {
+    private void addLineItem(LineItem lineItem) {
         lineItems.add(lineItem);
+    }
+
+    public void addLineItem(Product product, int quantity) {
+        this.addLineItem(new LineItem(product, quantity));
     }
 
     public int getTotalCost() {
@@ -18,7 +22,7 @@ public class ShoppingCard {
     }
 
     public List<LineItem> getLineItems() {
-        return this.lineItems;
+        return lineItems.stream().map(LineItem::new).collect(Collectors.toList());
     }
 
     @Override

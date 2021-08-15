@@ -14,8 +14,8 @@ public class Main {
         Product toothbrush = Catalogue.getProduct("Electric Toothbrush");
         Product babyAlarm = Catalogue.getProduct("Baby Alarm");
 
-        shoppingCard.addLineItem(new LineItem(toothbrush, 2));
-        shoppingCard.addLineItem(new LineItem(babyAlarm, 3));
+        shoppingCard.addLineItem(toothbrush, 2);
+        shoppingCard.addLineItem(babyAlarm, 3);
 
         Customer customer = new Customer("Andy Le", 777888999L);
         Optional<Order> order = customer.checkout(shoppingCard);
