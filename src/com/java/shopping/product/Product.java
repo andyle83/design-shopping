@@ -1,4 +1,4 @@
-package com.java.shopping;
+package com.java.shopping.product;
 
 public abstract class Product {
     private final String name;

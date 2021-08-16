@@ -1,5 +1,9 @@
 package com.java.shopping;
 
+import com.java.shopping.product.DigitalProduct;
+import com.java.shopping.product.PhysicalProduct;
+import com.java.shopping.product.Product;
+
 import java.util.Map;
 
 public class Catalogue {

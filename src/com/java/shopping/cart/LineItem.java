@@ -1,4 +1,6 @@
-package com.java.shopping;
+package com.java.shopping.cart;
+
+import com.java.shopping.product.Product;
 
 public class LineItem {
     private Product product;

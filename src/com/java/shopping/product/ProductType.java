@@ -1,4 +1,6 @@
-package com.java.shopping;
+package com.java.shopping.product;
+
+import com.java.shopping.Catalogue;
 
 public enum ProductType {
     DIGITAL(0), PHYSICAL(Catalogue.SHIPPING_RATE);

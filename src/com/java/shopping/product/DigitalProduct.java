@@ -1,6 +1,8 @@
-package com.java.shopping;
+package com.java.shopping.product;
 
-public class DigitalProduct extends  Product {
+import com.java.shopping.product.Product;
+
+public class DigitalProduct extends Product {
     public DigitalProduct(String productName, int price) {
         super(productName, price);
     }

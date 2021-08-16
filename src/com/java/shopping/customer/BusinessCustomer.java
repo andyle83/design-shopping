@@ -1,4 +1,6 @@
-package com.java.shopping;
+package com.java.shopping.customer;
+
+import com.java.shopping.customer.Customer;
 
 public class BusinessCustomer extends Customer {
 
@@ -6,8 +8,8 @@ public class BusinessCustomer extends Customer {
 
     private BusinessSize businessSize;
 
-    public BusinessCustomer(String name, long ccNumber, BusinessSize businessSize) {
-        super(name, ccNumber);
+    public BusinessCustomer(String name, BusinessSize businessSize) {
+        super(name);
         this.businessSize = businessSize;
     }
 

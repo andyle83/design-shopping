@@ -1,17 +1,21 @@
 package com.java.shopping;
 
+import com.java.shopping.cart.ShoppingCart;
+import com.java.shopping.customer.Customer;
+import com.java.shopping.payment.Payment;
+
 public class Order {
     private Customer customer;
-    private ShoppingCard shoppingCard;
+    private ShoppingCart shoppingCard;
     private Payment payment;
 
-    public Order(Customer customer, ShoppingCard shoppingCard, Payment payment) {
+    public Order(Customer customer, ShoppingCart shoppingCard, Payment payment) {
         this.customer = customer;
         this.shoppingCard = shoppingCard;
         this.payment = payment;
     }
 
-    public ShoppingCard getShoppingCard() {
+    public ShoppingCart getShoppingCard() {
         return this.shoppingCard;
     }
 

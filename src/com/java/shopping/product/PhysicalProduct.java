@@ -1,4 +1,7 @@
-package com.java.shopping;
+package com.java.shopping.product;
+
+import com.java.shopping.Catalogue;
+import com.java.shopping.product.Product;
 
 public class PhysicalProduct extends Product {
     private int weight;

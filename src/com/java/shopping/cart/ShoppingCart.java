@@ -1,10 +1,13 @@
-package com.java.shopping;
+package com.java.shopping.cart;
+
+import com.java.shopping.cart.LineItem;
+import com.java.shopping.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ShoppingCard {
+public class ShoppingCart {
     private List<LineItem> lineItems = new ArrayList<>();
 
     private void addLineItem(LineItem lineItem) {
@@ -27,7 +30,7 @@ public class ShoppingCard {
 
     @Override
     public String toString() {
-        return "ShoppingCard{" +
+        return "ShoppingCart{" +
                 "lineItems=" + lineItems +
                 '}';
     }

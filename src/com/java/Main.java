@@ -1,6 +1,14 @@
 package com.java;
 
 import com.java.shopping.*;
+import com.java.shopping.cart.LineItem;
+import com.java.shopping.cart.ShoppingCart;
+import com.java.shopping.customer.BusinessCustomer;
+import com.java.shopping.customer.Customer;
+import com.java.shopping.customer.NonProfitCustomer;
+import com.java.shopping.payment.BankAccount;
+import com.java.shopping.payment.CreditCard;
+import com.java.shopping.product.Product;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -8,29 +16,37 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        ShoppingCard shoppingCard = new ShoppingCard();
+        ShoppingCart shoppingCart = new ShoppingCart();
 
         // simulate database access
         Product toothbrush = Catalogue.getProduct("Electric Toothbrush");
         Product babyAlarm = Catalogue.getProduct("Baby Alarm");
 
-        shoppingCard.addLineItem(toothbrush, 2);
-        shoppingCard.addLineItem(babyAlarm, 3);
+        shoppingCart.addLineItem(toothbrush, 2);
+        shoppingCart.addLineItem(babyAlarm, 3);
 
         // single responsibility
-        Customer customer = new Customer("Andy Le", 777888999L);
-        Optional<Order> order = customer.checkout(shoppingCard);
+        Customer customer = new Customer("Andy Le");
+        customer.addPaymentMethod("Anh's Credit Card", new CreditCard(623468624L));
+        Optional<Order> order = customer.checkout(shoppingCart, "Anh's Credit Card Failed");
+        Optional<Order> retryOrder = customer.checkout(shoppingCart, "Anh's Credit Card");
 
         // demo for defensive by encapsulation
         System.out.println(order);
         order.ifPresent(Main::fulfil);
         System.out.println(order);
 
+        System.out.println(retryOrder);
+        retryOrder.ifPresent(Main::fulfil);
+        System.out.println(retryOrder);
+
         // demo for inheritance with stream
-        Customer janeDoe = new Customer("Jane Doe", 7838686812313L);
-        Customer acme = new BusinessCustomer("Acme Products", 688363863183618L, BusinessCustomer.BusinessSize.LARGE);
-        Customer globex = new BusinessCustomer("Globex Corp", 73917139739173L, BusinessCustomer.BusinessSize.LARGE);
-        Customer saveTheWorld = new NonProfitCustomer("Save the World", 98371971973L);
+        Customer janeDoe = new Customer("Jane Doe");
+        janeDoe.addPaymentMethod("Jane's Credit Card", new CreditCard(6486486286482L));
+        janeDoe.addPaymentMethod("Jane's Bank Account", new BankAccount(37837, 97979979L));
+        Customer acme = new BusinessCustomer("Acme Products", BusinessCustomer.BusinessSize.LARGE);
+        Customer globex = new BusinessCustomer("Globex Corp", BusinessCustomer.BusinessSize.LARGE);
+        Customer saveTheWorld = new NonProfitCustomer("Save the World");
 
         // count how many customer are one each discount rate
         // with function style - declarative style
@@ -47,14 +63,14 @@ public class Main {
     }
 
     public static void fulfil(Order order) {
-        ShoppingCard shoppingCard = order.getShoppingCard();
+        ShoppingCart shoppingCart = order.getShoppingCard();
         boolean shippingUnfinished;
 
         // simulate fulfil process ( take item out of stock )
         do {
             shippingUnfinished = false;
             // using iterator since it allows us to remove item inside the loop
-            for(Iterator<LineItem> it = shoppingCard.getLineItems().iterator(); it.hasNext();) {
+            for(Iterator<LineItem> it = shoppingCart.getLineItems().iterator(); it.hasNext();) {
                 LineItem lineItem = it.next();
 
                 if (Math.random() > 0.7) {
