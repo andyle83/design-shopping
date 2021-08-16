@@ -1,17 +1,13 @@
 package com.java.shopping;
 
-public class Product {
+public abstract class Product {
     private final String name;
     private int price;
     private int discount;
-    private int weight;
-    private ProductType producType;
 
-    public Product(String name, int price, ProductType productType, int weight) {
+    public Product(String name, int price) {
         this.name = name;
         this.price = price;
-        this.weight = weight;
-        this.producType = productType;
     }
 
     public void setDiscount(int discount) {
@@ -19,16 +15,17 @@ public class Product {
     }
 
     public int getPrice() {
-        int shippingCost = producType.getShippingCost(weight);
+        int shippingCost = calculateShippingCost();
         int priceWithDiscount = (int) (price * (100 - discount) / 100.0);
         return priceWithDiscount + shippingCost;
     }
+
+    public abstract int calculateShippingCost();
 
     @Override
     public String toString() {
         return "Product{" +
                 "name='" + name + '\'' +
-                ", price=" + price +
                 '}';
     }
 }
